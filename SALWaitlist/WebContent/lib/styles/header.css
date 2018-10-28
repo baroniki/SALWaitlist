@@ -1,0 +1,54 @@
+@font-face {
+    font-family: Montserrat-Regular;
+    src: url(../montserrat/Montserrat-Regular.otf);
+}
+
+body {
+    font-family: Montserrat-Regular;
+    background-color: #FFFFCC;
+    color: #898989;
+}
+
+/* Header Template */
+header {
+    height: 100px;
+}
+
+.header-el {
+    top: 28px;
+}
+
+.header-img {
+	top: 5px;
+}
+
+#logo {
+	height: 110px;
+	width: 110px;
+}
+
+#logo:hover {
+    background-color: #b4deff6b;
+    transition: 0.5s;
+    border-radius: 10px;
+}
+
+a#sign-out:hover {
+    color: #ff000099;
+    transition: 0.5s;
+}
+
+#header-signout {
+	right: -40px;
+}
+
+a {
+    color: #898989;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: none;
+    color: #b4deff;
+    transition: 0.5s;
+}
