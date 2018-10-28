@@ -2,3 +2,17 @@
 	height: 300px;
 	width: 300px;
 }
+
+.g-signin2 {
+	margin: 0 auto;
+}
+
+.guest-btn {
+	border-radius: 1px;
+	background-color: #cfe2f3ff;
+}
+
+.guest-btn:hover {
+	background-color: rgb(128, 183, 231);
+	transition: 0.5s;
+}
