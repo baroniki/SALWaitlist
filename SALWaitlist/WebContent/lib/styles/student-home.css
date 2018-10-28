@@ -1,0 +1,41 @@
+.classbox-container {
+    width: 300px;
+    position: absolute;
+    top: 120px;
+    left: 20px;
+}
+
+.classbox-dropdown {
+	width:51%;
+}
+
+.classbox-dropdown:hover {
+    background-color: #b7b7b7ff;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.classbox {
+    border: 1px solid black;
+    border-bottom: 0;
+    background-color: #b7b7b7ff;
+    color: #434343;
+}
+
+.classbox-selected {
+	background-color: #898989;
+}
+
+.classbox-entry {
+    margin: auto;
+    border-bottom: solid 1px black;
+    text-align: center;
+    font-size: 1.3em;
+}
+
+.classbox-entry:hover {
+    background-color: #898989;
+    transition: 0.5s;
+    cursor: pointer;
+}
