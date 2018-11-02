@@ -17,10 +17,14 @@
     <body>
         <div class="container-fluid mb-3">
             <header class="row">
-                <div class="col-md-2 header-img">
+                <div class="col-md-1 header-img">
                     <a href="student-home.jsp"><img id="logo" src="lib/images/201logo.png"></a>
                 </div>
-                <div class="col-md-1 offset-7 header-el">
+                <div class="col-md-3 header-el">
+                	<a href="student-home.jsp"><h3>SAL Waitlist</h3></a>
+                </div>
+                
+                <div class="col-md-1 offset-5 header-el">
                     <a href="profile.jsp"><h3>Profile</h3></a>
                 </div>
                 <div id="header-signout" class="col-md-2 header-el">
