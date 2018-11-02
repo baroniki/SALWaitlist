@@ -52,3 +52,13 @@ a:hover {
     color: #b4deff;
     transition: 0.5s;
 }
+
+.guest-btn {
+	border-radius: 1px;
+	background-color: #cfe2f3ff;
+}
+
+.guest-btn:hover {
+	background-color: rgb(128, 183, 231);
+	transition: 0.5s;
+}
