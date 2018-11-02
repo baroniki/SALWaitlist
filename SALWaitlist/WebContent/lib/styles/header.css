@@ -15,7 +15,7 @@ header {
 }
 
 .header-el {
-    top: 28px;
+    top: 36px;
 }
 
 .header-img {
@@ -23,8 +23,8 @@ header {
 }
 
 #logo {
-	height: 110px;
-	width: 110px;
+	height: 100px;
+	width: 100px;
 }
 
 #logo:hover {
