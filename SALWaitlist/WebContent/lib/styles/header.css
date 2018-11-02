@@ -3,6 +3,11 @@
     src: url(../montserrat/Montserrat-Regular.otf);
 }
 
+@font-face {
+	font-family: Montserrat-Bold;
+	src: url(../montserrat/Montserrat-Bold.otf);
+}
+
 body {
     font-family: Montserrat-Regular;
     background-color: #FFFFCC;
