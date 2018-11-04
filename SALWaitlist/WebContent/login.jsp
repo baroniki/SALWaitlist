@@ -36,9 +36,14 @@
             </div>
             <div class="row">
                 <div class="col-md-12 center-block text-center">
-                    <button type="button" class="btn btn-lg guest-btn">Sign in as Guest</button>
+                    <button type="button" id="guest-login" class="btn btn-lg guest-btn">Sign in as Guest</button>
                 </div>
             </div>
         </div>
+        <script type="text/javascript">
+        	$("#guest-login").click(() => {
+        		window.location.replace("student-home.jsp?status=guest");
+        	});
+        </script>
     </body>
 </html>

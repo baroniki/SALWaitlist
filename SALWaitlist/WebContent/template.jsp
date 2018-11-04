@@ -12,7 +12,6 @@
         <script type="text/JavaScript" src="lib/bootstrap/js/bootstrap.min.js"></script>
 
         <link rel="stylesheet" type="text/css" href="lib/styles/header.css" />
-        <link rel="stylesheet" type="text/css" href="lib/styles/student-home.css" />
     </head>
     <body>
         <div class="container-fluid mb-3">
@@ -32,37 +31,13 @@
                 </div>
             </header>
         </div>
-        <div class="classbox-container">
-            <div class="classbox-dropdown">
-                <h3>My Classes</h3>
-            </div>
-            
-            <div class="classbox">
-                
-            </div>
-        </div>
+        
         <div class="container">
-            <div class="classinfo-cont mb-5">
-                <h1 id="classinfo-name">CSCI 270</h1>
-                <h3 id="classinfo-cp">Current CP: Alex Baronikian</h3>
-            </div>
-
-            <div class="waittime-cont">
-                <h5 id="waittime-msg">Current class wait time:</h5>
-                <div class="waittime-time"><span id="time">30</span> min</div>
-            </div>
-
-            <div id="guest-message">
-                <h4>Sign in to add yourself to the waitlist.</h4>
-                <button type="button" id="signin-redirect" class="btn btn-lg guest-btn">Sign in</button>
-            </div>
-            
-            <div id="add-message">
-            	<h4>Would you like to add yourself to the waitlist?</h4>
-            	<button type="button" id="signin-redirect" class="btn btn-lg guest-btn">Add</button>
-            </div>
+            <!-- Page Content Goes Here -->
         </div>
 
-        <script type="text/JavaScript" src="lib/js/student-home.js"></script>
+        <script type="text/JavaScript">
+			
+        </script>
     </body>
 </html>
