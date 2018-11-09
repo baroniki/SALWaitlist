@@ -59,7 +59,7 @@
             
             <div id="add-message">
             	<h4>Would you like to add yourself to the waitlist?</h4>
-            	<button type="button" id="signin-redirect" class="btn btn-lg guest-btn">Add</button>
+            	<button type="button" id="add-button" class="btn btn-lg guest-btn">Add</button>
             </div>
         </div>
 

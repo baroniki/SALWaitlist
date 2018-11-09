@@ -4,6 +4,10 @@ $(".classbox-dropdown").click(() => {
 $("#signin-redirect").click(() => {
     window.location.replace("login.jsp");
 });
+$("#add-button").click(() => {
+    //Send post request to add to waitlist
+    $("#waittime-msg").html("Your current wait time:");
+});
 
 $(document).ready(() => {
     $(document).on('click', '.classbox-entry', (el) => {
@@ -22,21 +26,36 @@ $(document).ready(() => {
 
     updateClassDropdown(classes);
 
-    let time = getWaitTime(classes[0]);
+    let time = 
+    {
+        count : getWaitTime(classes[0])
+    };
     //Countdown for waittime every minute
-    setInterval(() => {
-        $("#time").html(time);
-        time = time-1;
-    }, 60000);
+    var timeCounter = turnOnTimeCounter(time);
 
     //Check for updates in waittime every 10 seconds
+    var timeUpdate = turnOnTimeUpdater(time);
+});
+
+function turnOnTimeCounter(time) {
+    setInterval(() => {
+        $("#time").html(time.count);
+        time.count = time.count-1;
+
+        if(time.count == 0) {
+            
+        }
+    }, 5000);
+}
+
+function turnOnTimeUpdater(time) {
     setInterval(() => {
         const waittime = getWaitTime(classes[0]);
-        if(waittime < time) {
-            time = waittime;
+        if(waittime < time.count) {
+            time.count = waittime;
         }
     }, 10000);
-});
+}
 
 function updateClassDropdown(classes) {
     let selectedClass = $('<div class=\"classbox-entry classbox-selected\"></div>');
@@ -108,4 +127,3 @@ function checkGuestOrStudent() {
 
     return status;
 }
-
