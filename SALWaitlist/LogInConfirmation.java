@@ -61,6 +61,7 @@ public class LogInConfirmation extends HttpServlet {
 			Class.forName("com.mysql.jdbc.Driver");
 			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/?user=root&password=brighton1101&useSSL=false");
 			st = conn.createStatement();
+			st.executeUpdate("USE finalDB;")
 			rs = st.executeQuery("SELECT * FROM CP WHERE Email='"+email+"';");
 			if (!rs.isBeforeFirst() ) {    
 			    return false;
@@ -98,6 +99,7 @@ public class LogInConfirmation extends HttpServlet {
 			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/?user=root&password=brighton1101&useSSL=false");
 			st = conn.createStatement();
 			//BELOW LINE IS ASSUMING WE CHANGED DB TO HAVE ONLY ONE NAME COLUMN
+			st.executeUpdate("USE finalDB;")
 			st.executeUpdate("INSERT INTO Students VALUES('"+email+"', '"+name+"', '"+profpic+"', '"+number+"') ;");
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
