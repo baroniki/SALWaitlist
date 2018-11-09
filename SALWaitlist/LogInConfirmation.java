@@ -36,20 +36,57 @@ public class LogInConfirmation extends HttpServlet {
 		String email = request.getParameter("email");
 		String name = request.getParameter("name");
 		String profPic = request.getParameter("profpic");
+		if (isCP(email)) {
+			out.println("cp");
+		}
 		Students st = getUserInfo(email);
-		String url;
-		if (st != null) {
+		else if (st != null) {
 			//user is in database
 			//redirect to normal page
-			url = ""; //SET URL AS HOMEPAGE -- INCLUDE EMAIL IN URL
-			out.println(url);
+			out.println("student");
 		}
 		else {
 			//users not in database
 			//redirect to sign up page to get phone #
 			addUser(email, name, profpic, "NONE");
-			url =""; //SET URL AS SIGN UP PAGE -- INCLUDE EMAIL IN URL
-			out.println(url);
+			out.println("new");
+		}
+	}
+
+	boolean isCP(String email) {
+		java.sql.Connection conn = null;
+		Statement st = null;
+		ResultSet rs = null;
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/?user=root&password=brighton1101&useSSL=false");
+			st = conn.createStatement();
+			rs = st.executeQuery("SELECT * FROM CP WHERE Email='"+email+"';");
+			if (!rs.isBeforeFirst() ) {    
+			    return false;
+			}
+			else {
+				return true;
+			}
+
+		}
+		catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		finally {
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+				if (st != null) {
+					st.close();
+				}
+				if (conn != null) {
+					conn.close();
+				}
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+			}
 		}
 	}
 	
@@ -92,7 +129,7 @@ public class LogInConfirmation extends HttpServlet {
 			st = conn.createStatement();
 			st.executeUpdate("USE finalDB"); //ACCESS DATABASE HERE
 			
-			rs = st.executeQuery("SELECT * FROM Students WHERE Email=" + email + ";");
+			rs = st.executeQuery("SELECT * FROM Students WHERE Email='" + email + "';");
 			if (!rs.isBeforeFirst() ) {    
 			    return null;
 			}
@@ -111,6 +148,21 @@ public class LogInConfirmation extends HttpServlet {
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
+		finally {
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+				if (st != null) {
+					st.close();
+				}
+				if (conn != null) {
+					conn.close();
+				}
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+			}
 		}
 		return s;
 	}
