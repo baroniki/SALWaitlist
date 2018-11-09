@@ -2,10 +2,9 @@ DROP DATABASE IF EXISTS finalDB;
 CREATE DATABASE finalDB;
 USE finalDB;
 CREATE TABLE Students(Email VARCHAR(25) PRIMARY KEY, 
-					  Fname VARCHAR(25), 
-					  Lname VARCHAR(25), 
-					  Profile_Picture_URL VARCHAR(300),
-				      Phone_Number VARCHAR(25)
+			  Full_Name VARCHAR(25), 
+			  Profile_Picture_URL VARCHAR(300),
+		      	  Phone_Number VARCHAR(25)
 					);
                         
 CREATE TABLE Past_Wait_Time(Email VARCHAR(25) PRIMARY KEY, 
