@@ -32,20 +32,24 @@ public class LogInConfirmation extends HttpServlet {
 	 */
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		PrintWriter out = response.getWriter();
 		String email = request.getParameter("email");
 		String name = request.getParameter("name");
 		String profPic = request.getParameter("profpic");
 		Students st = getUserInfo(email);
+		String url;
 		if (st != null) {
 			//user is in database
 			//redirect to normal page
-			
+			url = ""; //SET URL AS HOMEPAGE -- INCLUDE EMAIL IN URL
+			out.println(url);
 		}
 		else {
 			//users not in database
 			//redirect to sign up page to get phone #
-			
-			
+			addUser(email, name, profpic, "NONE");
+			url =""; //SET URL AS SIGN UP PAGE -- INCLUDE EMAIL IN URL
+			out.println(url);
 		}
 	}
 	
