@@ -1,0 +1,16 @@
+.container {
+	height: 600px;
+	overflow-y: scroll;
+}
+
+.table {
+	table-layout: fixed;
+}
+
+h3 {
+	text-align: center;
+}
+
+tr {
+	height: 50px;
+}
