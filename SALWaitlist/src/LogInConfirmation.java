@@ -1,6 +1,7 @@
 
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -18,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/LogInConfirmation")
 public class LogInConfirmation extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+    private String connString = "jdbc:mysql://localhost:3306/?user=root&password=brighton1101&useSSL=false";
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -36,10 +37,10 @@ public class LogInConfirmation extends HttpServlet {
 		String email = request.getParameter("email");
 		String name = request.getParameter("name");
 		String profPic = request.getParameter("profpic");
+		Students st = getUserInfo(email);
 		if (isCP(email)) {
 			out.println("cp");
-		}
-		Students st = getUserInfo(email);
+		}		
 		else if (st != null) {
 			//user is in database
 			//redirect to normal page
@@ -48,7 +49,7 @@ public class LogInConfirmation extends HttpServlet {
 		else {
 			//users not in database
 			//redirect to sign up page to get phone #
-			addUser(email, name, profpic, "NONE");
+			addUser(email, name, profPic, "NONE");
 			out.println("new");
 		}
 	}
@@ -59,9 +60,9 @@ public class LogInConfirmation extends HttpServlet {
 		ResultSet rs = null;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/?user=root&password=brighton1101&useSSL=false");
+			conn = DriverManager.getConnection(connString);
 			st = conn.createStatement();
-			st.executeUpdate("USE finalDB;")
+			st.executeUpdate("USE finalDB;");
 			rs = st.executeQuery("SELECT * FROM CP WHERE Email='"+email+"';");
 			if (!rs.isBeforeFirst() ) {    
 			    return false;
@@ -73,6 +74,9 @@ public class LogInConfirmation extends HttpServlet {
 		}
 		catch (SQLException e) {
 			System.out.println(e.getMessage());
+		}
+		catch(ClassNotFoundException ex) {
+			ex.printStackTrace();
 		}
 		finally {
 			try {
@@ -89,6 +93,8 @@ public class LogInConfirmation extends HttpServlet {
 				System.out.println(e.getMessage());
 			}
 		}
+		
+		return false;
 	}
 	
 	void addUser(String email, String name, String profpic, String number) {
@@ -96,10 +102,10 @@ public class LogInConfirmation extends HttpServlet {
 		Statement st = null;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/?user=root&password=brighton1101&useSSL=false");
+			conn = DriverManager.getConnection(connString);
 			st = conn.createStatement();
 			//BELOW LINE IS ASSUMING WE CHANGED DB TO HAVE ONLY ONE NAME COLUMN
-			st.executeUpdate("USE finalDB;")
+			st.executeUpdate("USE finalDB;");
 			st.executeUpdate("INSERT INTO Students VALUES('"+email+"', '"+name+"', '"+profpic+"', '"+number+"') ;");
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
