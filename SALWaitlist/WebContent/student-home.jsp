@@ -48,8 +48,8 @@
             </div>
 
             <div class="waittime-cont">
-                <h5 id="waittime-msg">Current class wait time:</h5>
-                <div class="waittime-time"><span id="time">30</span> min</div>
+                <div class="waittime-time">There are currently <span class="time">4</span> people ahead of you.</div>
+                <h5 id="waittime-msg">Estimated wait time: <span id="time" class="time">30</span> min</h5>
             </div>
 
             <div id="guest-message">
