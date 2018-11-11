@@ -3,21 +3,21 @@ CREATE DATABASE finalDB;
 USE finalDB;
 CREATE TABLE Students (
 	Email							VARCHAR(50)		PRIMARY KEY, 
-	Full_Name					VARCHAR(50), 
-	Profile_Picture_URL	VARCHAR(300),
-	Phone_Number			VARCHAR(25)
+	Full_Name						VARCHAR(50), 
+	Profile_Picture_URL				VARCHAR(300),
+	Phone_Number					VARCHAR(25)
 );
         
 CREATE TABLE Classes (
 	Class_ID						VARCHAR(25)		PRIMARY KEY,
     Email							VARCHAR(50),
-    Class_Name				VARCHAR(25), 
+    Class_Name						VARCHAR(25), 
 	FOREIGN KEY (Email) REFERENCES Students(Email)
 );
         
 CREATE TABLE Past_Wait_Time (
 	Email							VARCHAR(50)		PRIMARY KEY, 
-	Time_Spent					VARCHAR(25), 
+	Time_Spent						VARCHAR(25), 
 	Class_ID						VARCHAR(25), 
 	FOREIGN KEY (Email) REFERENCES Students(Email),
 	FOREIGN KEY (Class_ID) REFERENCES Classes(Class_ID)
@@ -26,7 +26,7 @@ CREATE TABLE Past_Wait_Time (
 CREATE TABLE Current_Users (
 	Email							VARCHAR(50), 
 	Class_ID						VARCHAR(25), 
-	Time_Started				VARCHAR(25),
+	Time_Started					VARCHAR(25),
 	FOREIGN KEY(Email) REFERENCES Students(Email),
 	FOREIGN KEY(Class_ID) REFERENCES Classes(Class_ID)
 );
