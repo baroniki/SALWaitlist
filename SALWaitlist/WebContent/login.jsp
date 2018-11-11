@@ -11,10 +11,12 @@
         content="626626550106-ltfsre641scr41vef9gc0rfuo1pthdjv.apps.googleusercontent.com">
         <script src="https://apis.google.com/js/platform.js" async defer></script>
 
-        <script type="text/JavaScript" src="lib/jquery/jquery-3.3.1.slim.min.js"></script>
+        <script type="text/JavaScript" src="lib/jquery/jquery-3.3.1.min.js"></script>
         
         <link rel="stylesheet" type="text/css" href="lib/bootstrap/css/bootstrap.min.css" />
         <script type="text/JavaScript" src="lib/bootstrap/js/bootstrap.min.js"></script>
+        
+        <script type="text/javascript" src="script.js"></script>
 
         <link rel="stylesheet" type="text/css" href="lib/styles/header.css" />
         <link rel="stylesheet" type="text/css" href="lib/styles/login.css" />

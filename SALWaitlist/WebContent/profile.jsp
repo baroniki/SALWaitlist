@@ -8,13 +8,17 @@
         
         <title>SAL Waitlist - Profile Page</title>
 
-        <script type="text/JavaScript" src="lib/jquery/jquery-3.3.1.slim.min.js"></script>
+        <script type="text/JavaScript" src="lib/jquery/jquery-3.3.1.min.js"></script>
         
         <link rel="stylesheet" type="text/css" href="lib/bootstrap/css/bootstrap.min.css" />
         <script type="text/JavaScript" src="lib/bootstrap/js/bootstrap.min.js"></script>
 
+		<script type="text/javascript" src="script.js"></script>
+		<script type="text/javascript" src="lib/styles/multiple-select.js"></script>
+
         <link rel="stylesheet" type="text/css" href="lib/styles/header.css" />
         <link rel="stylesheet" href="lib/styles/profile.css">
+        <link rel="stylesheet" href="lib/styles/multiple-select.css" />
     </head>
     <body>
     	<script>
@@ -23,6 +27,14 @@
     		}
     	
     	</script>
+    	
+    	<%
+    		String email = (String) request.getAttribute("email");
+    		String name = (String) request.getAttribute("name");
+    		String imgURL = (String) request.getAttribute("profpic");
+    	%>
+    	
+    	
         <div class="container-fluid">
             <header class="row">
                 <div class="col-md-1 header-img">
@@ -52,9 +64,9 @@
 					<label for="phoneNumber">Phone Number </label>
 				  	<input id = "phoneNumber" type="text" name="event">	
 				  	<br>
-				  	<div class="dropdown">
+<!-- 				  	<div class="dropdown">
 				  		<label for="choose">Choose your classes: </label>
-				  		 <!-- <p style="text-indent :5em;" > </p> -->
+				  		 <p style="text-indent :5em;" > </p>
 						<button onclick="myFunction()" id = "choose"class="dropbtn">Classes</button>
   						<div id="myDropdown" class="dropdown-content">
     						<input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">
@@ -66,12 +78,21 @@
 							    <a href="#support">CS 270</a>
 							    <a href="#tools">CS 310</a>
   						</div>
-					</div>
+					</div> -->
+					
+					<select multiple="multiple">
+						<option value="1">CSCI 103</option>
+						<option value="2">CSCI 104</option>
+						<option value="3">CSCI 109</option>
+					</select>
+					<script>
+						$('select').multipleSelect();
+					</script>
 
 					<script>
 					/* When the user clicks on the button,
 					toggle between hiding and showing the dropdown content */
-					function myFunction() {
+/* 					function myFunction() {
 					    document.getElementById("myDropdown").classList.toggle("show");
 					}
 					
@@ -88,7 +109,7 @@
 					            a[i].style.display = "none";
 					        }
 					    }
-					}
+					} */
 					</script>
 				  <div id = "submit">
 				  	<input id = "submitButton"  type="button" value="Add Changes" onclick = "profileInfo();">
