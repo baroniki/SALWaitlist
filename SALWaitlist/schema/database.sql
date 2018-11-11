@@ -14,14 +14,6 @@ CREATE TABLE Classes (
     Class_Name						VARCHAR(25), 
 	FOREIGN KEY (Email) REFERENCES Students(Email)
 );
-        
-CREATE TABLE Past_Wait_Time (
-	Email							VARCHAR(50)		PRIMARY KEY, 
-	Time_Spent						VARCHAR(25), 
-	Class_ID						VARCHAR(25), 
-	FOREIGN KEY (Email) REFERENCES Students(Email),
-	FOREIGN KEY (Class_ID) REFERENCES Classes(Class_ID)
-					);
 					
 CREATE TABLE Current_Users (
 	Email							VARCHAR(50), 
