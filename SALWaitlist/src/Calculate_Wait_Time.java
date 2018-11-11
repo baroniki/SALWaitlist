@@ -42,7 +42,8 @@ public class Calculate_Wait_Time extends HttpServlet {
 		String email = request.getParameter("email");
 		String classid = request.getParameter("classid");
 		int wait_time = calculateWaitTime(email, classid);
-		out.print(wait_time);
+		int num_ppl_ahead = wait_time/6;
+		out.print(num_ppl_ahead);
 	}
 	
 	public int calculateWaitTime(String email, String classid) {
