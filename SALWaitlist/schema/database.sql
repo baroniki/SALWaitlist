@@ -11,7 +11,6 @@ CREATE TABLE Students (
 CREATE TABLE Classes (
 	Class_ID						VARCHAR(25)		PRIMARY KEY,
     	Email							VARCHAR(50),
-    	Class_Name						VARCHAR(25), 
 	FOREIGN KEY (Email) REFERENCES Students(Email)
 );
 					
