@@ -10,8 +10,8 @@ CREATE TABLE Students (
         
 CREATE TABLE Classes (
 	Class_ID						VARCHAR(25)		PRIMARY KEY,
-    Email							VARCHAR(50),
-    Class_Name						VARCHAR(25), 
+    	Email							VARCHAR(50),
+    	Class_Name						VARCHAR(25), 
 	FOREIGN KEY (Email) REFERENCES Students(Email)
 );
 					
@@ -25,5 +25,6 @@ CREATE TABLE Current_Users (
 CREATE TABLE CP (
 	Email							VARCHAR(50)		PRIMARY KEY, 
 	Class_ID						VARCHAR(25), 
+	Name VARCHAR(50),
 	FOREIGN KEY (Class_ID) REFERENCES Classes(Class_ID)
 );
