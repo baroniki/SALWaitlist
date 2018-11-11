@@ -26,35 +26,23 @@ $(document).ready(() => {
 
     updateClassDropdown(classes);
 
-    let time = 
-    {
-        count : getWaitTime(classes[0])
-    };
+    let time = getWaitTime(classes[0]);
+    updateTimeSpan(time);
     //Countdown for waittime every minute
     var timeCounter = turnOnTimeCounter(time);
-
-    //Check for updates in waittime every 10 seconds
-    var timeUpdate = turnOnTimeUpdater(time);
 });
 
 function turnOnTimeCounter(time) {
     setInterval(() => {
-        $("#time").html(time.count);
-        time.count = time.count-1;
-
-        if(time.count == 0) {
-            
+        if(time.min != 0) {
+            time.min--;
         }
+        else if(time.hr != 0) {
+            time.hr--;
+            time.min = 59;
+        }
+        updateTimeSpan(time);
     }, 5000);
-}
-
-function turnOnTimeUpdater(time) {
-    setInterval(() => {
-        const waittime = getWaitTime(classes[0]);
-        if(waittime < time.count) {
-            time.count = waittime;
-        }
-    }, 10000);
 }
 
 function updateClassDropdown(classes) {
@@ -71,15 +59,29 @@ function updateClassDropdown(classes) {
     }
 
     $(".classbox").append(unselectedClasses);
+}
 
+function updateTimeSpan(time) {
+    let timeSpan = $("#time");
     
+    let timeHour = time.hr, timeMin = time.min;
+    if(time.hr < 10)
+        timeHour = "0" + time.hr;
+    if(time.min < 10)
+        timeMin = "0" + time.min;
+
+    timeSpan.html(timeHour + ":" + timeMin);
 }
 
 //Calculates wait time for given class
 function getWaitTime(className) {
-    const waitTime = 30;
+    const waitTime = 
+    {
+        hr : 1,
+        min : 16
+    };
 
-    return 30;
+    return waitTime;
 }
 
 //Get all classes for guest to see

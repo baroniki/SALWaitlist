@@ -42,14 +42,14 @@
             </div>
         </div>
         <div class="container">
-            <div class="classinfo-cont mb-5">
+            <div class="classinfo-cont mb-4">
                 <h1 id="classinfo-name">CSCI 270</h1>
                 <h3 id="classinfo-cp">Current CP: Alex Baronikian</h3>
             </div>
 
-            <div class="waittime-cont">
-                <div class="waittime-time">There are currently <span class="time">4</span> people ahead of you.</div>
-                <h5 id="waittime-msg">Estimated wait time: <span id="time" class="time">30</span> min</h5>
+            <div class="waittime-cont mb-5">
+                <div class="waittime-time">There are currently <span class="time">5</span> people ahead of you.</div>
+                <h5 id="waittime-msg">Estimated wait time: <span id="time" class="time">00:00</span> min</h5>
             </div>
 
             <div id="guest-message">
