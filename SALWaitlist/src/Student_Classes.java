@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/Student_Classes")
 public class Student_Classes extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private String connString = "jdbc:mysql://localhost:3306/finalDB?user=root&useSSL=false";
+	private String connString = "jdbc:mysql://localhost:3306/finalDB?user=root&password=root&useSSL=false";
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -49,7 +49,7 @@ public class Student_Classes extends HttpServlet {
 			//access database
 			st.executeUpdate("USE finalDB;");
 			//prepared statement to grab student classes
-			PreparedStatement statement = conn.prepareStatement("SELECT * Class_ID FROM Enrollment WHERE email='"+email+"'");
+			PreparedStatement statement = conn.prepareStatement("SELECT Class_ID FROM Enrollment WHERE email='"+email+"'");
 			ResultSet result = statement.executeQuery();
 			while(result.next()) {
 				returned_classes += result.getString("Class_ID") + "&";

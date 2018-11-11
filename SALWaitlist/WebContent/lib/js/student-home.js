@@ -21,7 +21,7 @@ $(document).ready(() => {
     
     var classes = getClasses(); //element 0 is always the selected class
 
-    if(status === 'student') 
+    //if(status === 'student') 
         classes = getStudentClasses()
 
     updateClassDropdown(classes);
@@ -30,6 +30,14 @@ $(document).ready(() => {
     updateTimeSpan(time);
     //Countdown for waittime every minute
     var timeCounter = turnOnTimeCounter(time);
+    
+    $.post('Calculate_Wait_Time', 		
+    {
+    	email : 'baroniki@usc.edu',
+    	classid : classes[0]
+    }, (response) => {
+    	console.log(response);
+    });
 });
 
 function turnOnTimeCounter(time) {
@@ -93,7 +101,21 @@ function getClasses() {
 
 //Get all of student's classes
 function getStudentClasses() {
-    const classes = ["CSCI 104", "CSCI 170"];
+    let classes;
+    
+    $.ajax({
+        type : 'POST',
+        url : 'Student_Classes', 
+        data : 
+        {
+            email : 'baroniki@usc.edu'
+        }, 
+        success : 
+        (response) => {
+            classes = response.split('&');
+        },
+        async : false
+    });
 
     return classes;
 }
