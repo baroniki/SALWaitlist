@@ -17,6 +17,9 @@ import javax.servlet.http.HttpServletResponse;
 public class LogInServlet extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
+	
+	String dbPass = "root";
+	private String connString = String.format("jdbc:mysql://localhost:3306/finalDB?user=root&password=%s&useSSL=false", dbPass);
 
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Connection conn = null;
@@ -32,7 +35,7 @@ public class LogInServlet extends HttpServlet {
 		
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/finalDB?user=root&password=12345&userSSL=false");
+			conn = DriverManager.getConnection(connString);
 			
 			if (action.equals("authenticate")) {
 				String sql = "SELECT * FROM CP WHERE Email = ?";

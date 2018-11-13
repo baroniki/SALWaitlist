@@ -19,7 +19,9 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/LogInConfirmation")
 public class LogInConfirmation extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    private String connString = "jdbc:mysql://localhost:3306/?user=root&password=brighton1101&useSSL=false";
+	
+	String dbPass = "root";
+	private String connString = String.format("jdbc:mysql://localhost:3306/finalDB?user=root&password=%s&useSSL=false", dbPass);
     /**
      * @see HttpServlet#HttpServlet()
      */

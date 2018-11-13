@@ -1,11 +1,11 @@
 
-
 import java.io.IOException;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,38 +18,41 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/AddToWaitlist")
 public class AddToWaitlist extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private String connString = "jdbc:mysql://localhost:3306/finalDB?user=root&useSSL=false";
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public AddToWaitlist() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+	String dbPass = "root";
+	private String connString = String.format("jdbc:mysql://localhost:3306/finalDB?user=root&password=%s&useSSL=false", dbPass);
 
 	/**
-	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public AddToWaitlist() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void service(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		String classid = request.getParameter("classid");
 		String email = request.getParameter("email");
 		addToWaitlist(email, classid);
 	}
-	
+
 	public void addToWaitlist(String email, String classid) {
 		java.sql.Connection conn = null;
 		Statement st = null;
 		try {
-			//connect to database
+			// connect to database
 			Class.forName("com.mysql.jdbc.Driver");
 			conn = DriverManager.getConnection(connString);
 			st = conn.createStatement();
-			//access database
+			// access database
 			st.executeUpdate("USE finalDB;");
-			//insert into database
+			// insert into database
 			String query = "INSERT INTO CURRENT_USERS(email_to_insert, class_id_to_insert)" + "values(?, ?)";
-			//prepared statement to grab student classes
+			// prepared statement to grab student classes
 			PreparedStatement statement = conn.prepareStatement(query);
 			statement.setString(1, email);
 			statement.setString(2, classid);
@@ -58,8 +61,7 @@ public class AddToWaitlist extends HttpServlet {
 			System.out.println(e.getMessage());
 		} catch (ClassNotFoundException e) {
 			System.out.println(e.getMessage());
-		}
-		finally {
+		} finally {
 			try {
 				if (conn != null) {
 					conn.close();

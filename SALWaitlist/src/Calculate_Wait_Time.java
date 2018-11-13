@@ -21,7 +21,8 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/Calculate_Wait_Time")
 public class Calculate_Wait_Time extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private String connString = "jdbc:mysql://localhost:3306/?user=root&useSSL=false";
+	String dbPass = "root";
+	private String connString = String.format("jdbc:mysql://localhost:3306/finalDB?user=root&password=%s&useSSL=false", dbPass);
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -57,7 +58,7 @@ public class Calculate_Wait_Time extends HttpServlet {
 			//access database
 			st.executeUpdate("USE finalDB;");
 			//prepared statement to determine row count
-			PreparedStatement statement = conn.prepareStatement("SELECT COUNT * as rowcount FROM Current_Users WHERE classid='"+classid+"'");
+			PreparedStatement statement = conn.prepareStatement("SELECT COUNT(*) as rowcount FROM Current_Users WHERE Class_ID='"+classid+"'");
 			ResultSet result = statement.executeQuery();
 			result.next();
 			int count = result.getInt("rowcount");
