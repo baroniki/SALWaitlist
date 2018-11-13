@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="java.util.List" %>
+<%@ page import="SALWaitlist.Student" %>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -38,31 +42,59 @@
 		<!-- Page Content Goes Here -->
 		<h3>You are currently helping Glory.</h3>
 		<div class="container">
-            <table class="table table-striped">
-	            <thead>
+			<table class="table table-striped">
+				<thead>
 					<tr>
 						<th>Student Name</th>
 						<th>Email</th>
-						<th>Average Time</th>
+						<th>Phone Number</th>
 						<th>Started</th>
 						<th>Finished</th>
 					</tr>
-	            </thead>
-	            <tbody>
-					<tr>
+				</thead>
+				<tbody>
+ 					<%
+ 						if (request.getSession().getAttribute("students") != null) {
+ 							List<Student> students = (ArrayList<Student>) request.getSession().getAttribute("students");
+	 						int index = 0;
+							for (Student student : students) {
+								out.print("<tr>");
+								out.print("<td>" + student.getName() + "</td>");
+								out.print("<td>" + student.getEmail() + "</td>");
+								out.print("<td>" + student.getPhoneNumber() + "</td>");
+								for (int i = 0; i < 2; i++) {
+									out.print("<td><div class='custom-control custom-checkbox'>" +
+											  "<input type='checkbox' class='custom-control-input' id='tableDefaultCheck" + index + "'>" +
+											  "<label class='custom-control-label' for='tableDefaultCheck" + (index++) + "'>" +
+											  "<span class='text-hide'>Check</span></label></div></td>");
+								}
+								out.print("</tr>");
+							}
+							
+							if (students.size() < 15) {
+								for (int i = 0; i < 15 - students.size(); i++) {
+									out.print("<tr><td></td><td></td><td></td><td></td><td></td></tr>");
+								}
+							}
+ 						}
+					%>
+<!-- 					<tr>
 						<td>Daniel Kim</td>
 						<td>kim321@usc.edu</td>
 						<td>00:15</td>
 						<td>
 							<div class="custom-control custom-checkbox">
 								<input type="checkbox" class="custom-control-input" id="tableDefaultCheck1">
-								<label class="custom-control-label" for="tableDefaultCheck1"><span class="text-hide">Check</span></label>
+								<label class="custom-control-label" for="tableDefaultCheck1">
+									<span class="text-hide">Check</span></label>
 							</div>
 						</td>
 						<td>
 							<div class="custom-control custom-checkbox">
-								<input type="checkbox" class="custom-control-input" id="tableDefaultCheck2">
-								<label class="custom-control-label" for="tableDefaultCheck2"><span class="text-hide">Check</span></label>
+								<input type="checkbox" class="custom-control-input"
+									id="tableDefaultCheck2"> <label
+									class="custom-control-label" for="tableDefaultCheck2"><span
+									class="text-hide">Check</span></label>
 							</div>
 						</td>
 					</tr>
@@ -72,80 +104,21 @@
 						<td>00:10</td>
 						<td>
 							<div class="custom-control custom-checkbox">
-								<input type="checkbox" class="custom-control-input" id="tableDefaultCheck3">
-								<label class="custom-control-label" for="tableDefaultCheck3"><span class="text-hide">Check</span></label>
+								<input type="checkbox" class="custom-control-input"
+									id="tableDefaultCheck3"> <label
+									class="custom-control-label" for="tableDefaultCheck3"><span
+									class="text-hide">Check</span></label>
 							</div>
 						</td>
 						<td>
 							<div class="custom-control custom-checkbox">
-								<input type="checkbox" class="custom-control-input" id="tableDefaultCheck4">
-								<label class="custom-control-label" for="tableDefaultCheck4"><span class="text-hide">Check</span></label>
+								<input type="checkbox" class="custom-control-input"
+									id="tableDefaultCheck4"> <label
+									class="custom-control-label" for="tableDefaultCheck4"><span
+									class="text-hide">Check</span></label>
 							</div>
 						</td>
-					</tr>
-					<tr>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-					</tr>
-					<tr>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-					</tr>
-					<tr>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-					</tr>
-					<tr>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-					</tr>
-					<tr>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-					</tr>
-					<tr>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-					</tr>
-					<tr>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-					</tr>
-					<tr>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-					</tr>
-					<tr>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-					</tr>
+					</tr> -->
 				</tbody>
 			</table>
 		</div>
