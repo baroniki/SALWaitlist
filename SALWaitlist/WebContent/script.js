@@ -64,8 +64,8 @@ function onSignIn(googleUser) {
 
 function updateProfile(email) {	
 	var phoneNumber = document.getElementById("phoneNumber").value;
-	var format = /^\d{10}$/;
-	if (phoneNumber.match(format)) {
+	
+	if (phoneNumber === "") {
 		var checked = [];
 		$("input:checkbox:checked").each(function(){
 		    checked.push($(this).val());
@@ -80,10 +80,31 @@ function updateProfile(email) {
 				'classes': JSON.stringify(checked)
 			},
 			success: function() {
-				alert("Profile successfully updated!");
+				alert("Classes successfully updated!");
 			}
 		});
 	} else {
-		alert("Invalid number. Please enter 10 digits.");
+		var format = /^\d{10}$/;
+		if (phoneNumber.match(format)) {
+			var checked = [];
+			$("input:checkbox:checked").each(function(){
+			    checked.push($(this).val());
+			});
+			
+			$.ajax({
+				type: "POST",
+				url: "ProfileServlet",
+				data: {
+					'email': email,
+					'phoneNumber': phoneNumber,
+					'classes': JSON.stringify(checked)
+				},
+				success: function() {
+					alert("Phone number and classes successfully updated!");
+				}
+			});
+		} else {
+			alert("Invalid phone number. Please enter 10 digits.");
+		}
 	}
 }
