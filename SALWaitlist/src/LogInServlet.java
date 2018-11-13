@@ -1,5 +1,4 @@
 
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -25,29 +24,50 @@ public class LogInServlet extends HttpServlet {
 		PreparedStatement ps = null;
 		PrintWriter out = response.getWriter();
 		
-		String email = request.getParameter("email");
+		String action = request.getParameter("action");
+		String nextPage = request.getParameter("nextPage");
+		String email = request.getParameter("email").toLowerCase();
+		String name = request.getParameter("name");
+		String imgURL = request.getParameter("imgURL");
 		
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/finalDB?user=root&password=12345&userSSL=false");
 			
-			String sql = "SELECT * FROM CP WHERE Email=?";
-			ps = conn.prepareStatement(sql);
-			ps.setString(1, email.toLowerCase());
-			rs = ps.executeQuery();
-			
-			if (rs.next()) {
-				out.write("cp");
-			} else {
-				sql = "SELECT * FROM Students WHERE Email=?";
+			if (action.equals("authenticate")) {
+				String sql = "SELECT * FROM CP WHERE Email = ?";
 				ps = conn.prepareStatement(sql);
-				ps.setString(1, email.toLowerCase());
+				ps.setString(1, email);
 				rs = ps.executeQuery();
 				
 				if (rs.next()) {
-					out.write("student");
+					out.write("cp");
 				} else {
-					out.write("new");
+					sql = "SELECT * FROM Students WHERE Email = ?";
+					ps = conn.prepareStatement(sql);
+					ps.setString(1, email);
+					rs = ps.executeQuery();
+					
+					if (rs.next()) {
+						out.write("student");
+					} else {
+						sql = "INSERT INTO Students (Email, Full_Name, Profile_Picture_URL) VALUES (?,?,?)";
+						ps = conn.prepareStatement(sql);
+						ps.setString(1, email);
+						ps.setString(2, name);
+						ps.setString(3, imgURL);
+						ps.executeUpdate();
+						out.write("new");
+					}
+				}
+			} else if (action.equals("redirect")) {
+				request.getSession().setAttribute("email", email);
+				request.getSession().setAttribute("name", name);
+				request.getSession().setAttribute("imgURL", imgURL);
+				if (nextPage.equals("/cp-home.jsp")) {
+					request.getRequestDispatcher("/WaitlistServlet").forward(request, response);
+				} else {
+					request.getRequestDispatcher(nextPage).forward(request, response);
 				}
 			}
 		} catch (SQLException sqle) {
