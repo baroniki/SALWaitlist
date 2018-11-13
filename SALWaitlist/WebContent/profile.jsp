@@ -21,20 +21,12 @@
         <link rel="stylesheet" href="lib/styles/multiple-select.css" />
     </head>
     <body>
-    	<script>
-    		function profileInfo(){
-    			
-    		}
-    	
-    	</script>
-    	
     	<%
-    		String email = (String) request.getAttribute("email");
-    		String name = (String) request.getAttribute("name");
-    		String imgURL = (String) request.getAttribute("profpic");
+    		String email = (String) request.getSession().getAttribute("email");
+    		String name = (String) request.getSession().getAttribute("name");
+    		String imgURL = (String) request.getSession().getAttribute("imgURL");	
     	%>
-    	
-    	
+		
         <div class="container-fluid">
             <header class="row">
                 <div class="col-md-1 header-img">
@@ -57,63 +49,36 @@
 				<div class = "col-md-6"  align = "center" id = "profile">
 					<div id = "profilePic" align ="center">
 						<span class="dot"></span>
+						<img src="<%= imgURL %>">
 					</div>
 					<div id ="profileName" align = "center">
-						<h1>Glory Kanes</h1>
+						<h1><%= name %></h1>
 					</div>
-					<label for="phoneNumber">Phone Number </label>
-				  	<input id = "phoneNumber" type="text" name="event">	
+					<label for="phoneNumber">Phone Number</label>
+				  	<input id="phoneNumber" type="text" maxlength="10" pattern="\d{10}">
 				  	<br>
-<!-- 				  	<div class="dropdown">
-				  		<label for="choose">Choose your classes: </label>
-				  		 <p style="text-indent :5em;" > </p>
-						<button onclick="myFunction()" id = "choose"class="dropbtn">Classes</button>
-  						<div id="myDropdown" class="dropdown-content">
-    						<input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">
-							    <a href="#about">CS 103</a>
-							    <a href="#base">CS 109</a>
-							    <a href="#blog">CS 104</a>
-							    <a href="#contact">CS 170</a>
-							    <a href="#custom">CS 201</a>
-							    <a href="#support">CS 270</a>
-							    <a href="#tools">CS 310</a>
-  						</div>
-					</div> -->
 					
-					<select multiple="multiple">
-						<option value="1">CSCI 103</option>
-						<option value="2">CSCI 104</option>
-						<option value="3">CSCI 109</option>
+					<label>Classes</label>
+					<select id="classList" multiple="multiple">
+						<option value="CSCI 103">CSCI 103</option>
+						<option value="CSCI 104">CSCI 104</option>
+						<option value="CSCI 109">CSCI 109</option>
+						<option value="CSCI 170">CSCI 170</option>
+						<option value="CSCI 201">CSCI 201</option>
+						<option value="CSCI 270">CSCI 270</option>
+						<option value="CSCI 310">CSCI 310</option>
+						<option value="CSCI 350">CSCI 350</option>
+						<option value="CSCI 353">CSCI 353</option>
+						<option value="CSCI 356">CSCI 356</option>
+						<option value="CSCI 360">CSCI 360</option>
 					</select>
 					<script>
 						$('select').multipleSelect();
 					</script>
 
-					<script>
-					/* When the user clicks on the button,
-					toggle between hiding and showing the dropdown content */
-/* 					function myFunction() {
-					    document.getElementById("myDropdown").classList.toggle("show");
-					}
-					
-					function filterFunction() {
-					    var input, filter, ul, li, a, i;
-					    input = document.getElementById("myInput");
-					    filter = input.value.toUpperCase();
-					    div = document.getElementById("myDropdown");
-					    a = div.getElementsByTagName("a");
-					    for (i = 0; i < a.length; i++) {
-					        if (a[i].innerHTML.toUpperCase().indexOf(filter) > -1) {
-					            a[i].style.display = "";
-					        } else {
-					            a[i].style.display = "none";
-					        }
-					    }
-					} */
-					</script>
-				  <div id = "submit">
-				  	<input id = "submitButton"  type="button" value="Add Changes" onclick = "profileInfo();">
-				  </div>
+					<div id="submit">
+				  		<button type="button" id="submitButton" onclick="updateProfile('<%= email %>')">Add Changes</button>
+					</div>
 				</div>
 				<div class = "col-md-3"></div>
 			</div>
