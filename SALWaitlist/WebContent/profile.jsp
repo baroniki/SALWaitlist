@@ -6,7 +6,13 @@
         <meta charset="ISO-8859-1">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         
-        <title>SAL Waitlist - Profile Page</title>
+		<title>SAL Waitlist - Profile Page</title>
+		
+		<meta name="google-signin-scope" content="profile email">
+        <meta name="google-signin-client_id" 
+        content="626626550106-ltfsre641scr41vef9gc0rfuo1pthdjv.apps.googleusercontent.com">
+        <script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
+        <script type="text/JavaScript" src="lib/js/signout.js"></script>
 
         <script type="text/JavaScript" src="lib/jquery/jquery-3.3.1.min.js"></script>
         

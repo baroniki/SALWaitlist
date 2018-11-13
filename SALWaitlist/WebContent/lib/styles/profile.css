@@ -92,3 +92,11 @@
 #submitButton:hover, .dropbtn:focus {
     background-color: #898989;
 }
+
+.container-fluid {
+    overflow: -webkit-paged-x;
+}
+
+.ms-parent {
+    width: 17% !important;
+}
