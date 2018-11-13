@@ -14,10 +14,10 @@ CREATE TABLE Classes (
         
 CREATE TABLE Enrollment (
 	Class_ID						VARCHAR(25),
-    Email							VARCHAR(50),
-    FOREIGN KEY (Class_ID) REFERENCES Classes (Class_ID),
+    	Email							VARCHAR(50),
+    	FOREIGN KEY (Class_ID) REFERENCES Classes (Class_ID),
 	FOREIGN KEY (Email) REFERENCES Students(Email),
-    PRIMARY KEY (Class_ID, Email)
+   	 PRIMARY KEY (Class_ID, Email)
 );
         
 CREATE TABLE Past_Wait_Time (
@@ -40,3 +40,16 @@ CREATE TABLE CP (
     	Name							VARCHAR(50),
 	FOREIGN KEY (Class_ID) REFERENCES Classes(Class_ID)
 );
+
+INSERT INTO Classes VALUES
+	('CSCI 103'), 
+   	('CSCI 104'),
+    	('CSCI 109'),
+    	('CSCI 170'),
+    	('CSCI 201'),
+    	('CSCI 270'),
+    	('CSCI 310'),
+    	('CSCI 350'),
+    	('CSCI 353'),
+    	('CSCI 356'),
+    	('CSCI 360');
