@@ -54,8 +54,7 @@
 				<div class = "col-md-3"></div>
 				<div class = "col-md-6"  align = "center" id = "profile">
 					<div id = "profilePic" align ="center">
-						<span class="dot"></span>
-						<img src="<%= imgURL %>">
+						<img class = "img-circle" src="<%= imgURL %>">
 					</div>
 					<div id ="profileName" align = "center">
 						<h1><%= name %></h1>
