@@ -1,6 +1,7 @@
 
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -21,21 +22,19 @@ import SALWaitlist.Student;
 public class WaitlistServlet extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
-	
-	String dbPass = "root";
-	private String connString = String.format("jdbc:mysql://localhost:3306/finalDB?user=root&password=%s&useSSL=false", dbPass);
        
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Connection conn = null;
 		ResultSet rs = null;
 		PreparedStatement ps = null;
+		PrintWriter out = response.getWriter();
 		
 		String email = request.getParameter("email").toLowerCase();
 		List<Student> students = new ArrayList<Student>();
 		
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			conn = DriverManager.getConnection(connString);
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/finalDB?user=root&password=12345&userSSL=false");
 			
 			String sql = "SELECT * FROM CP WHERE Email = ?";
 			ps = conn.prepareStatement(sql);
@@ -69,6 +68,13 @@ public class WaitlistServlet extends HttpServlet {
 						}
 					}
 				}
+				
+				for (Student student : students) {
+					out.print("Name:" + student.getName());
+					out.print("Email:" + student.getEmail());
+					out.print("Phone #:" + student.getPhoneNumber());
+					out.flush();
+				}
 
 				request.getSession().setAttribute("students", students);
 				request.getRequestDispatcher("/cp-home.jsp").forward(request, response);
@@ -79,6 +85,9 @@ public class WaitlistServlet extends HttpServlet {
 			System.out.println("cnfe: " + cnfe.getMessage());
 		} finally {
 			try {
+				if (out != null) {
+					out.close();
+				}
 				if (ps != null) {
 					ps.close();
 				}
