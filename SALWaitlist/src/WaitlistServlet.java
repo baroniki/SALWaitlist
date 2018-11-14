@@ -16,6 +16,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+
 import SALWaitlist.Student;
 
 @WebServlet("/WaitlistServlet")
@@ -76,8 +78,9 @@ public class WaitlistServlet extends HttpServlet {
 					out.flush();
 				}
 
-				request.getSession().setAttribute("students", students);
-				request.getRequestDispatcher("/cp-home.jsp").forward(request, response);
+				String json = new Gson().toJson(students);
+				response.setContentType("application/json");
+				response.getWriter().write(json);
 			}
 		} catch (SQLException sqle) {
 			System.out.println("sqle: " + sqle.getMessage());
