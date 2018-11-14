@@ -10,7 +10,7 @@ public class Notification {
 	
 	public Notification(String phoneNumber) {
 		Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
-		Message message5 = Message.creator(new PhoneNumber(phoneNumber),
+		Message message5 = Message.creator(new PhoneNumber("+1" + phoneNumber),
 	            new PhoneNumber("+12016895329"), 
 	            "It is your turn!").create();
 		System.out.println(message5.getSid());
