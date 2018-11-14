@@ -38,7 +38,13 @@ function initPage() {
 			email : userEmail,
 			classid : classes[0]
 		});
-	    console.log("added");
+        console.log("added");
+        
+        $.post('UserServlet', 
+        {
+            classID : classes[0],
+            email : userEmail
+        });
 	});
 	
     
