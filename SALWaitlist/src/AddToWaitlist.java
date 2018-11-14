@@ -51,7 +51,7 @@ public class AddToWaitlist extends HttpServlet {
 			// access database
 			st.executeUpdate("USE finalDB;");
 			// insert into database
-			String query = "INSERT INTO CURRENT_USERS(email_to_insert, class_id_to_insert)" + "values(?, ?)";
+			String query = "INSERT INTO Current_Users(Email, Class_ID)" + "values(?, ?)";
 			// prepared statement to grab student classes
 			PreparedStatement statement = conn.prepareStatement(query);
 			statement.setString(1, email);

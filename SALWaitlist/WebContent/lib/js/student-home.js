@@ -1,47 +1,80 @@
-$(".classbox-dropdown").click(() => {
-    $(".classbox-unselected").slideToggle();
-});
-$("#signin-redirect").click(() => {
-    window.location.replace("login.jsp");
-});
-$("#add-button").click(() => {
-    //Send post request to add to waitlist
-    $("#waittime-msg").html("Your current wait time:");
-});
+const CP = 
+{
+    'CSCI 103' : 'Alex Baronikian',
+    'CSCI 104' : 'Daniel Kim',
+    'CSCI 109' : 'Brighton Balfrey',
+    'CSCI 170' : 'Aahaad Patel',
+    'CSCI 201' : 'Glory Kanes',
+    'CSCI 270' : 'Alex Baronikian',
+    'CSCI 310' : 'Daniel Kim',
+    'CSCI 350' : 'Brighton Balfrey',
+    'CSCI 353' : 'Aahaad Patel',
+    'CSCI 356' : 'Glory Kanes',
+    'CSCI 360' : 'Alex Baronikian'
+};
+var classes;
+var userEmail = "";
 
 $(document).ready(() => {
+    $.post('UserSession', 
+    {
+        action: "get"
+    }, (data) => {
+        userEmail = data;
+        initPage();
+    });
+});
+function initPage() {
+	$(".classbox-dropdown").click(() => {
+	    $(".classbox-unselected").slideToggle();
+	});
+	$("#signin-redirect").click(() => {
+	    window.location.replace("login.jsp");
+	});
+	$("#add-button").click(() => {
+	    //Send post request to add to waitlist
+		$.post('AddToWaitlist', 
+		{
+			email : userEmail,
+			classid : classes[0]
+		});
+	    console.log("added");
+	});
+	
+    
     $(document).on('click', '.classbox-entry', (el) => {
         const classToSelect = $(el.target).html();
         if(classToSelect !== classes[0]) {
             selectClass(classes, getClassIndex(classes, classToSelect));
+            clearInterval(counter);
+            counter = updateCounters(classes);
         }
     });
 
     const status = checkGuestOrStudent();
     
-    var classes = getClasses(); //element 0 is always the selected class
+    classes = getClasses(); //element 0 is always the selected class
 
     if(status !== 'guest') 
-        classes = getStudentClasses()
+        classes = getStudentClasses();
+        
 
     updateClassDropdown(classes);
+    var counter = updateCounters(classes);
+}
 
-    let time = getWaitTime(classes[0]);
+function updateCounters(classes) {
+    let peopleAhead = getWaitTime(classes[0])
+    let time = minsToTimeObject(6*peopleAhead);
+
+    updatePeopleAheadSpan(peopleAhead);
     updateTimeSpan(time);
     //Countdown for waittime every minute
-    var timeCounter = turnOnTimeCounter(time);
-    
-    $.post('Calculate_Wait_Time', 		
-    {
-    	email : 'baroniki@usc.edu',
-    	classid : classes[0]
-    }, (response) => {
-    	console.log(response);
-    });
-});
+    return turnOnTimeCounter(time);
+}
 
 function turnOnTimeCounter(time) {
-    setInterval(() => {
+    let counter = setInterval(() => {
         if(time.min != 0) {
             time.min--;
         }
@@ -51,6 +84,8 @@ function turnOnTimeCounter(time) {
         }
         updateTimeSpan(time);
     }, 5000);
+
+    return counter;
 }
 
 function updateClassDropdown(classes) {
@@ -81,20 +116,50 @@ function updateTimeSpan(time) {
     timeSpan.html(timeHour + ":" + timeMin);
 }
 
+function minsToTimeObject(mins) {
+    let hrs = 0;
+    while(mins >= 60) {
+        mins -= 60;
+        hrs += 1;
+    }
+
+    let time = 
+    {
+        hr : hrs,
+        min: mins
+    };
+
+    return time;
+}
+
+function updatePeopleAheadSpan(peopleAhead) {
+    $("#people").html(peopleAhead);
+}
+
 //Calculates wait time for given class
 function getWaitTime(className) {
-    const waitTime = 
-    {
-        hr : 1,
-        min : 16
-    };
+    let waitTime = 0;
+    
+    $.ajax({
+        type : 'POST',
+        url : 'Calculate_Wait_Time', 
+        data : 
+        {
+            classid : className
+        }, 
+        success : 
+        (response) => {
+            waitTime = response;
+        },
+        async : false
+    });
 
     return waitTime;
 }
 
 //Get all classes for guest to see
 function getClasses() {
-    const classes = ["CSCI 270", "CSCI 104", "CSCI 170", "CSCI 360"];
+    const classes = ['CSCI 103', 'CSCI 104', 'CSCI 109', 'CSCI 170', 'CSCI 201', 'CSCI 270', 'CSCI 310', 'CSCI 350', 'CSCI 353', 'CSCI 360'];
 
     return classes;
 }
@@ -102,13 +167,13 @@ function getClasses() {
 //Get all of student's classes
 function getStudentClasses() {
     let classes;
-    
+
     $.ajax({
         type : 'POST',
         url : 'Student_Classes', 
         data : 
         {
-            email : 'baroniki@usc.edu'
+            email : userEmail
         }, 
         success : 
         (response) => {
@@ -124,6 +189,9 @@ function selectClass(classes, classIndex) {
     const temp = classes[0];
     classes[0] = classes[classIndex];
     classes[classIndex] = temp;
+
+    $(".classinfo-name").html(classes[0]);
+    $(".classinfo-cp").html(CP[classes[0]]);
 
     updateClassDropdown(classes);
 }

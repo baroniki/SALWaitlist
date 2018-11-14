@@ -36,20 +36,16 @@ public class Calculate_Wait_Time extends HttpServlet {
 	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-		// TODO Auto-generated method stub
 		PrintWriter out = response.getWriter();
-		String email = request.getParameter("email");
 		String classid = request.getParameter("classid");
-		int wait_time = calculateWaitTime(email, classid);
-		int num_ppl_ahead = wait_time/6;
+		int num_ppl_ahead = calculateWaitTime(classid);
 		out.print(num_ppl_ahead);
 	}
 	
-	public int calculateWaitTime(String email, String classid) {
+	public int calculateWaitTime(String classid) {
 		java.sql.Connection conn = null;
 		Statement st = null;
+		int count = 0;
 		try {
 			//connect to database
 			Class.forName("com.mysql.jdbc.Driver");
@@ -61,12 +57,9 @@ public class Calculate_Wait_Time extends HttpServlet {
 			PreparedStatement statement = conn.prepareStatement("SELECT COUNT(*) as rowcount FROM Current_Users WHERE Class_ID='"+classid+"'");
 			ResultSet result = statement.executeQuery();
 			result.next();
-			int count = result.getInt("rowcount");
+			count = result.getInt("rowcount");
 			//determine total wait time
-			int total_wait_time = count*6;
 			result.close();
-			
-			return total_wait_time;
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		} catch (ClassNotFoundException e) {
@@ -81,6 +74,6 @@ public class Calculate_Wait_Time extends HttpServlet {
 				System.out.println(e.getMessage());
 			}
 		}
-		return 0;
+		return count;
 	}
 }

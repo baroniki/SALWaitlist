@@ -60,6 +60,12 @@ function onSignIn(googleUser) {
 			}
 		}
 	});
+	
+	$.post('UserSession', 
+	{
+		action: 'set',
+		email: GoogleUser.getBasicProfile().getEmail()
+	});
 }
 
 function updateProfile(email) {	

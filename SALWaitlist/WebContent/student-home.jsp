@@ -5,6 +5,10 @@
     <head>
         <meta charset="ISO-8859-1">
         <title>SAL Waitlist - Home</title>
+        
+        <script type="text/JavaScript" src="lib/jquery/jquery-3.3.1.min.js"></script>
+        
+        <script type="text/JavaScript" src="lib/js/student-home.js"></script>
 
         <meta name="google-signin-scope" content="profile email">
         <meta name="google-signin-client_id" 
@@ -12,7 +16,7 @@
         <script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
         <script type="text/JavaScript" src="lib/js/signout.js"></script>
 
-        <script type="text/JavaScript" src="lib/jquery/jquery-3.3.1.min.js"></script>
+        
         
         <link rel="stylesheet" type="text/css" href="lib/bootstrap/css/bootstrap.min.css" />
         <script type="text/JavaScript" src="lib/bootstrap/js/bootstrap.min.js"></script>
@@ -54,7 +58,7 @@
             </div>
 
             <div class="waittime-cont mb-5">
-                <div class="waittime-time">There are currently <span class="time">5</span> people ahead of you.</div>
+                <div class="waittime-time">There are currently <span id="people" class="time">5</span> people waiting.</div>
                 <h5 id="waittime-msg">Estimated wait time: <span id="time" class="time">00:00</span> min</h5>
             </div>
 
@@ -69,6 +73,5 @@
             </div>
         </div>
 
-        <script type="text/JavaScript" src="lib/js/student-home.js"></script>
     </body>
 </html>
