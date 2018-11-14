@@ -27,7 +27,7 @@ public class RemoveFromWaitlist extends HttpServlet {
 		
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/finalDB?user=root&password=12345&userSSL=false");
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/finalDB?user=root&password=root&userSSL=false");
 			
 			String sql = "DELETE FROM Current_Users WHERE Email='" + email + "'";
 			ps = conn.prepareStatement(sql);
