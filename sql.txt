@@ -1,0 +1,32 @@
+INSERT INTO Classes VALUES
+	('CSCI 103'), 
+   	('CSCI 104'),
+	('CSCI 109'),
+	('CSCI 170'),
+	('CSCI 201'),
+	('CSCI 270'),
+	('CSCI 310'),
+	('CSCI 350'),
+	('CSCI 353'),
+	('CSCI 356'),
+	('CSCI 360');
+
+INSERT INTO Students VALUES
+    ('aahaad@usc.edu', 'Aahaad Patel', ' ', '4692586923'),
+    ('bbalfrey@usc.edu', 'Brighton Balfrey', ' ', '8056464945'),
+    ('gkanes@usc.edu', 'Glory Kanes', ' ', '9144679159');
+
+INSERT INTO Enrollment VALUES
+    ('CSCI 201', 'aahaad@usc.edu'),
+    ('CSCI 201', 'bbalfrey@usc.edu'),
+    ('CSCI 270', 'gkanes@usc.edu'),
+    ('CSCI 201', 'gkanes@usc.edu');
+
+INSERT INTO CP VALUES
+	('cindy@usc.edu', 'CSCI 201', 'Cindy Clarrisa'),
+    ('daniel@usc.edu', 'CSCI 270', 'Daniel Kim');
+    
+INSERT INTO Current_Users VALUES
+    ('bbalfrey@usc.edu', 'CSCI 201'),
+    ('gkanes@usc.edu', 'CSCI 201'),
+    ('aahaad@usc.edu', 'CSCI 270');
