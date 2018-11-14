@@ -1,8 +1,11 @@
 @charset "UTF-8";
-.img-circle{
+#profilePic {
+	padding-top: 30px;
 	height: 150px;
 	width: 150px;
-	border-radius:50%;
+	background-color: #bbb;
+	border-radius: 50%;
+	/* display: inline-block; */
 }
 .prof{
 	width: 100%;
