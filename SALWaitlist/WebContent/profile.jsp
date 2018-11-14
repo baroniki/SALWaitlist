@@ -26,13 +26,7 @@
         <link rel="stylesheet" href="lib/styles/profile.css">
         <link rel="stylesheet" href="lib/styles/multiple-select.css" />
     </head>
-    <body>
-    	<%
-    		String email = (String) request.getSession().getAttribute("email");
-    		String name = (String) request.getSession().getAttribute("name");
-    		String imgURL = (String) request.getSession().getAttribute("imgURL");	
-    	%>
-		
+    <body onload="loadProfile()">		
         <div class="container-fluid">
             <header class="row">
                 <div class="col-md-1 header-img">
@@ -53,12 +47,9 @@
 			<div class = "row">
 				<div class = "col-md-3"></div>
 				<div class = "col-md-6"  align = "center" id = "profile">
-					<div id = "profilePic" align ="center">
-						<img class = "img-circle" src="<%= imgURL %>">
-					</div>
-					<div id ="profileName" align = "center">
-						<h1><%= name %></h1>
-					</div>
+					<div id = "profilePic" align ="center"></div>
+					<div id="profileName" align="center"></div>
+					
 					<label for="phoneNumber">Phone Number</label>
 				  	<input id="phoneNumber" type="text" maxlength="10" pattern="\d{10}">
 				  	<br>
@@ -82,7 +73,7 @@
 					</script>
 
 					<div id="submit">
-				  		<button type="button" id="submitButton" onclick="updateProfile('<%= email %>')">Add Changes</button>
+				  		<button type="button" id="submitButton" onclick="updateProfile()">Add Changes</button>
 					</div>
 				</div>
 				<div class = "col-md-3"></div>
