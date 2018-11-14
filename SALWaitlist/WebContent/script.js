@@ -35,12 +35,6 @@ function onSignIn(googleUser) {
 			}
 		}
 	});
-	
-	$.post('UserSession', 
-	{
-		action: 'set',
-		email: GoogleUser.getBasicProfile().getEmail()
-	});
 }
 
 function loadProfile() {
@@ -62,7 +56,35 @@ function loadTable() {
 				'email': gapi.auth2.getAuthInstance().currentUser.get().getBasicProfile().getEmail()
 			},
 			success: function(result) {
-				console.log(result);
+				var students = result;
+				$(function() {
+					var content = "";
+					for (var i = 0; i < students.length; i++) {
+						content += "<tr>";
+						content += "<td>" + students[i].name + "</td>";
+						content += "<td>" + students[i].email + "</td>";
+						if (students[i].phoneNumber === null || students[i].phoneNumber === "") {
+							content += "<td>--</td>";
+						} else {
+							content += "<td>" + students[i].phoneNumber + "</td>";
+						}
+						content += "<td><div class='custom-control custom-checkbox'> \
+								   <input type='checkbox' class='custom-control-input' id='startCheck" + i + "' onclick=\"helpStudent('" + students[i].name + "', " + i + ")\"> \
+								   <label class='custom-control-label' for='startCheck" + i + "'> \
+								   <span class='text-hide'>Check</span></label></div></td>";
+						content += "<td><div class='custom-control custom-checkbox'> \
+								   <input type='checkbox' class='custom-control-input' id='finishCheck" + i + "' onclick=\"removeStudent('" + students[i].email + "', '" + students[i].name + "', " + i + ")\" disabled> \
+								   <label class='custom-control-label' for='finishCheck" + i + "'> \
+								   <span class='text-hide'>Check</span></label></div></td>";
+						content += "</tr>";
+					}
+					if (students.length < 15) {
+						for (var i = 0; i < 15 - students.length; i++) {
+							content += "<tr><td></td><td></td><td></td><td></td><td></td></tr>";
+						}
+					}
+					$("#table tbody").html(content);
+				});
 			}
 		});
 	}, 100);
