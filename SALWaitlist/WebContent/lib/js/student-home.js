@@ -21,7 +21,7 @@ $(document).ready(() => {
     
     var classes = getClasses(); //element 0 is always the selected class
 
-    //if(status === 'student') 
+    if(status !== 'guest') 
         classes = getStudentClasses()
 
     updateClassDropdown(classes);
@@ -140,7 +140,7 @@ function checkGuestOrStudent() {
     const urlParams = new URLSearchParams(window.location.search);
     const status = urlParams.get('status');
 
-    if(status === "student") {
+    if(status !== "guest") {
         $("#guest-message").hide();
         $("#add-message").show();
     }
