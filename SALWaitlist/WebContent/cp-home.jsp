@@ -16,15 +16,17 @@
         <script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
         <script type="text/JavaScript" src="lib/js/signout.js"></script>
 
-        <script type="text/JavaScript" src="lib/jquery/jquery-3.3.1.slim.min.js"></script>
+        <script type="text/JavaScript" src="lib/jquery/jquery-3.3.1.min.js"></script>
         
         <link rel="stylesheet" type="text/css" href="lib/bootstrap/css/bootstrap.min.css" />
         <script type="text/JavaScript" src="lib/bootstrap/js/bootstrap.min.js"></script>
 
+		<script type="text/javascript" src="script.js"></script>
+
         <link rel="stylesheet" type="text/css" href="lib/styles/header.css" />
         <link rel="stylesheet" type="text/css" href="lib/styles/cp-home.css" />
     </head>
-    <body>
+    <body onload="loadTable()">
         <div class="container-fluid">
             <header class="row">
                 <div class="col-md-2 header-img">
@@ -40,7 +42,7 @@
 		</div>
 		
 		<!-- Page Content Goes Here -->
-		<h3>You are currently helping Glory.</h3>
+		<h3 id="current" style="height:33px; visibility:hidden"></h3>
 		<div class="container">
 			<table class="table table-striped">
 				<thead>
@@ -61,13 +63,19 @@
 								out.print("<tr>");
 								out.print("<td>" + student.getName() + "</td>");
 								out.print("<td>" + student.getEmail() + "</td>");
-								out.print("<td>" + student.getPhoneNumber() + "</td>");
-								for (int i = 0; i < 2; i++) {
-									out.print("<td><div class='custom-control custom-checkbox'>" +
-											  "<input type='checkbox' class='custom-control-input' id='tableDefaultCheck" + index + "'>" +
-											  "<label class='custom-control-label' for='tableDefaultCheck" + (index++) + "'>" +
-											  "<span class='text-hide'>Check</span></label></div></td>");
+								if (student.getPhoneNumber() == null || student.getPhoneNumber().equals("")) {
+									out.print("<td>--</td>");
+								} else {
+									out.print("<td>" + student.getPhoneNumber() + "</td>");
 								}
+								out.print("<td><div class='custom-control custom-checkbox'>" +
+										  "<input type='checkbox' class='custom-control-input' id='startCheck" + index + "' onclick=\"helpStudent('" + student.getName() + "', " + index + ")\">" +
+										  "<label class='custom-control-label' for='startCheck" + index + "'>" +
+										  "<span class='text-hide'>Check</span></label></div></td>");
+								out.print("<td><div class='custom-control custom-checkbox'>" +
+										  "<input type='checkbox' class='custom-control-input' id='finishCheck" + index + "' onclick=\"removeStudent('" + student.getEmail() + "', '" + student.getName() + "', " + index + ")\" disabled>" +
+										  "<label class='custom-control-label' for='finishCheck" + (index++) + "'>" +
+										  "<span class='text-hide'>Check</span></label></div></td>");
 								out.print("</tr>");
 							}
 							
