@@ -44,7 +44,7 @@
 		<!-- Page Content Goes Here -->
 		<h3 id="current" style="height:33px; visibility:hidden"></h3>
 		<div class="container">
-			<table class="table table-striped">
+			<table id="table" class="table table-striped">
 				<thead>
 					<tr>
 						<th>Student Name</th>
@@ -54,80 +54,7 @@
 						<th>Finished</th>
 					</tr>
 				</thead>
-				<tbody>
- 					<%
- 						if (request.getSession().getAttribute("students") != null) {
- 							List<Student> students = (ArrayList<Student>) request.getSession().getAttribute("students");
-	 						int index = 0;
-							for (Student student : students) {
-								out.print("<tr>");
-								out.print("<td>" + student.getName() + "</td>");
-								out.print("<td>" + student.getEmail() + "</td>");
-								if (student.getPhoneNumber() == null || student.getPhoneNumber().equals("")) {
-									out.print("<td>--</td>");
-								} else {
-									out.print("<td>" + student.getPhoneNumber() + "</td>");
-								}
-								out.print("<td><div class='custom-control custom-checkbox'>" +
-										  "<input type='checkbox' class='custom-control-input' id='startCheck" + index + "' onclick=\"helpStudent('" + student.getName() + "', " + index + ")\">" +
-										  "<label class='custom-control-label' for='startCheck" + index + "'>" +
-										  "<span class='text-hide'>Check</span></label></div></td>");
-								out.print("<td><div class='custom-control custom-checkbox'>" +
-										  "<input type='checkbox' class='custom-control-input' id='finishCheck" + index + "' onclick=\"removeStudent('" + student.getEmail() + "', '" + student.getName() + "', " + index + ")\" disabled>" +
-										  "<label class='custom-control-label' for='finishCheck" + (index++) + "'>" +
-										  "<span class='text-hide'>Check</span></label></div></td>");
-								out.print("</tr>");
-							}
-							
-							if (students.size() < 15) {
-								for (int i = 0; i < 15 - students.size(); i++) {
-									out.print("<tr><td></td><td></td><td></td><td></td><td></td></tr>");
-								}
-							}
- 						}
-					%>
-<!-- 					<tr>
-						<td>Daniel Kim</td>
-						<td>kim321@usc.edu</td>
-						<td>00:15</td>
-						<td>
-							<div class="custom-control custom-checkbox">
-								<input type="checkbox" class="custom-control-input" id="tableDefaultCheck1">
-								<label class="custom-control-label" for="tableDefaultCheck1">
-									<span class="text-hide">Check</span></label>
-							</div>
-						</td>
-						<td>
-							<div class="custom-control custom-checkbox">
-								<input type="checkbox" class="custom-control-input"
-									id="tableDefaultCheck2"> <label
-									class="custom-control-label" for="tableDefaultCheck2"><span
-									class="text-hide">Check</span></label>
-							</div>
-						</td>
-					</tr>
-					<tr>
-						<td>Glory Kanes</td>
-						<td>gkanes@usc.edu</td>
-						<td>00:10</td>
-						<td>
-							<div class="custom-control custom-checkbox">
-								<input type="checkbox" class="custom-control-input"
-									id="tableDefaultCheck3"> <label
-									class="custom-control-label" for="tableDefaultCheck3"><span
-									class="text-hide">Check</span></label>
-							</div>
-						</td>
-						<td>
-							<div class="custom-control custom-checkbox">
-								<input type="checkbox" class="custom-control-input"
-									id="tableDefaultCheck4"> <label
-									class="custom-control-label" for="tableDefaultCheck4"><span
-									class="text-hide">Check</span></label>
-							</div>
-						</td>
-					</tr> -->
-				</tbody>
+				<tbody></tbody>
 			</table>
 		</div>
     </body>
