@@ -38,7 +38,6 @@ function initPage() {
 			email : userEmail,
 			classid : classes[0]
 		});
-        console.log("added");
         
         $.post('UserServlet', 
         {
@@ -65,6 +64,7 @@ function initPage() {
         classes = getStudentClasses();
         
 
+    updateClassInfo(classes);
     updateClassDropdown(classes);
     var counter = updateCounters(classes);
 }
@@ -196,10 +196,14 @@ function selectClass(classes, classIndex) {
     classes[0] = classes[classIndex];
     classes[classIndex] = temp;
 
-    $(".classinfo-name").html(classes[0]);
-    $(".classinfo-cp").html(CP[classes[0]]);
+    updateClassInfo(classes);
 
     updateClassDropdown(classes);
+}
+
+function updateClassInfo(classes) {
+    $("#classinfo-name").html(classes[0]);
+    $("#classinfo-cp").html("Current CP: " + CP[classes[0]]);
 }
 
 function getClassIndex(classes, className) {

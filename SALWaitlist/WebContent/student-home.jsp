@@ -53,8 +53,8 @@
         </div>
         <div class="container">
             <div class="classinfo-cont mb-4">
-                <h1 id="classinfo-name">CSCI 270</h1>
-                <h3 id="classinfo-cp">Current CP: Alex Baronikian</h3>
+                <h1 id="classinfo-name">Class</h1>
+                <h3 id="classinfo-cp">Current CP:</h3>
             </div>
 
             <div class="waittime-cont mb-5">
