@@ -1,4 +1,4 @@
-# SALWaitlist
+# queue
   
 queue is a web application for students taking computer science classes at USC. Our app enables students to optimize their time by seeing the current wait time for a class and adding themselves to the waitlist.  
   
