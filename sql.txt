@@ -66,10 +66,4 @@ INSERT INTO Enrollment VALUES
     ('CSCI 201', 'gkanes@usc.edu');
 
 INSERT INTO CP VALUES
-	('cindy@usc.edu', 'CSCI 201', 'Cindy Clarrisa'),
-    ('daniel@usc.edu', 'CSCI 270', 'Daniel Kim');
-    
-INSERT INTO Current_Users VALUES
-    ('bbalfrey@usc.edu', 'CSCI 201'),
-    ('gkanes@usc.edu', 'CSCI 201'),
-    ('aahaad@usc.edu', 'CSCI 270');
+    ('kim321@usc.edu', 'CSCI 201', 'Daniel Kim');
